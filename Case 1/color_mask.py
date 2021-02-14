@@ -1,8 +1,11 @@
 import cv2
 import numpy
+import imutils
 
 if __name__ == '__main__':
     coordinates = []
+
+
     def nothing(*arg):
         pass
 
@@ -32,18 +35,19 @@ if __name__ == '__main__':
             dArea = moments['m00']
 
             x = 0
-
-            if dArea > 150:
+            print(dArea)
+            if dArea > 300:
                 x = int(dM10 / dArea)
                 y = int(dM01 / dArea)
                 coordinates.append((x, y))
                 cv2.circle(img, (x, y), 10, (0, 0, 255), -1)
 
-            if (x > (width / 2 + edge)) and x != 0:
+            """if (x > (width / 2 + edge)) and x != 0:
                 cv2.rectangle(img, (0, 0), (30, height), (0, 255, 0), -1)
             if (x < (width / 2 - edge)) and x != 0:
-                cv2.rectangle(img, (width - 30, 0), (width, height), (0, 255, 0), -1)
+                cv2.rectangle(img, (width - 30, 0), (width, height), (0, 255, 0), -1)"""
 
+            img = imutils.resize(img, 720, 480)
             cv2.imshow("out_window", img)
         except:
             vs.release()
