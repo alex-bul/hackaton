@@ -79,17 +79,16 @@ if __name__ == '__main__':
         print("Data is invalid")
     print(f"zero point: {zero_point}, coefficient: {RATE}")
     # print(points)
-
+    points = list(map(lambda x: (abs(x[0] - zero_point[0]) * RATE, abs(x[1] - zero_point[1]) * RATE), points))
     with open("output.csv", "w") as csv_file:
-        writer = csv.DictWriter(csv_file, ("start_coords", "end_coords", "coefficient", "data"))  #
-        writer.writerow(
-            {"start_coords": zero_point,
-             "end_coords": prev,
-             "coefficient": RATE,
-             "data": list(map(lambda x: (abs(x[0] - zero_point[0]) * RATE, abs(x[1] - zero_point[1]) * RATE), points))
-
-             }
-        )
+        writer = csv.DictWriter(csv_file, (
+        "start_coords", "end_coords", "coefficient", *[f"data{i}" for i in range(len(points))]))
+        data = {"start_coords": zero_point,
+                "end_coords": prev,
+                "coefficient": RATE}
+        for i in range(len(points)):
+            data[f"data{i}"] = points[i]
+        writer.writerow(data)
 
         """
         
