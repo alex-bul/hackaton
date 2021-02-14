@@ -2,7 +2,7 @@ import pandas as pd
 import csv
 import matplotlib.pyplot as plt
 
-lab1, lab2, lab3 = ['data/' + input() for i in range(3)]
+lab1, lab2, lab3 = ['data/out' + input() for i in range(3)]
 
 for i in [lab1, lab2, lab3]:
     with open(i, 'r') as in_file:
