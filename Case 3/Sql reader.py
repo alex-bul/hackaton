@@ -17,7 +17,7 @@ class DBSample(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('UI1.ui', self)
-        self.setWindowTitle('Sql Reader')
+        self.setWindowTitle('Reader')
         self.connection = sqlite3.connect("Res\\logs.db")
         self.pushButton.clicked.connect(self.select_data)
         self.horizontalSlider.valueChanged[int].connect(self.changeValue)
@@ -32,7 +32,6 @@ class DBSample(QMainWindow):
             data = f.read().split('\n')
             for i in data:
                 res.append(i.split())
-
 
         self.tableWidget.setColumnCount(5)
         self.tableWidget.setHorizontalHeaderLabels(['Название', 'Широта', 'Долгота', 'Интенсивность', 'Энергия'])
